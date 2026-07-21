@@ -12,22 +12,26 @@ const server_contacts = [
             {
                 id: 1,
                 sendByMe: false,
-                content: "hola!"
+                content: "hola!",
+                time: "10:14"
             },
             {
                 id: 2,
                 sendByMe: true,
-                content: "Todo bien!"
+                content: "Todo bien!",
+                time: "10:15"
             },
             {
                 id: 3,
                 sendByMe: false,
-                content: "Que tal?"
+                content: "Que tal?",
+                time: "10:20"
             },
             {
                 id: 4,
                 sendByMe: true,
-                content: "Todo bien!"
+                content: "Nos vemos mañana!",
+                time: "10:22"
             }
         ]
     },
@@ -39,22 +43,20 @@ const server_contacts = [
             {
                 id: 1,
                 sendByMe: false,
-                content: "hola!"
+                content: "hola!",
+                time: "09:00"
             },
             {
                 id: 2,
                 sendByMe: true,
-                content: "Todo bien!"
+                content: "Te pasé la información",
+                time: "09:05"
             },
             {
                 id: 3,
                 sendByMe: false,
-                content: "Que tal?"
-            },
-            {
-                id: 4,
-                sendByMe: true,
-                content: "Todo bien!"
+                content: "Dale, gracias 🙏",
+                time: "09:10"
             }
         ]
     },
@@ -66,22 +68,14 @@ const server_contacts = [
             {
                 id: 1,
                 sendByMe: false,
-                content: "hola!"
+                content: "hola!",
+                time: "08:15"
             },
             {
                 id: 2,
-                sendByMe: true,
-                content: "Todo bien!"
-            },
-            {
-                id: 3,
                 sendByMe: false,
-                content: "Que tal?"
-            },
-            {
-                id: 4,
-                sendByMe: true,
-                content: "Todo bien!"
+                content: "Te mando el archivo",
+                time: "08:18"
             }
         ]
     },
@@ -93,22 +87,14 @@ const server_contacts = [
             {
                 id: 1,
                 sendByMe: false,
-                content: "hola!"
+                content: "Viste la foto?",
+                time: "Ayer"
             },
             {
                 id: 2,
                 sendByMe: true,
-                content: "Todo bien!"
-            },
-            {
-                id: 3,
-                sendByMe: false,
-                content: "Que tal?"
-            },
-            {
-                id: 4,
-                sendByMe: true,
-                content: "Todo bien!"
+                content: "Jajaja sí",
+                time: "Ayer"
             }
         ]
     },
@@ -129,62 +115,63 @@ function ContactContextProvider() {
         const contacts_modified = contacts.map(
             (contact) => {
                 if (contact.id === Number(contact_id)) {
-                    const message_index = contact.messages.findIndex(message => message.id === Number(message_id))
-                    contact.messages.splice(message_index, 1)
+                    const filteredMessages = contact.messages.filter(message => message.id !== Number(message_id))
+                    const lastMsg = filteredMessages.length > 0 ? filteredMessages[filteredMessages.length - 1].content : ""
+                    return {
+                        ...contact,
+                        messages: filteredMessages,
+                        lastMessage: lastMsg
+                    }
                 }
-
                 return contact
             }
         )
-        setContacts(
-            contacts_modified
-        )
+        setContacts(contacts_modified)
     }
 
     function createMessage(value, sendByMe) {
+        const now = new Date()
+        const hours = String(now.getHours()).padStart(2, '0')
+        const minutes = String(now.getMinutes()).padStart(2, '0')
+        const currentTime = `${hours}:${minutes}`
+
         const contacts_modified = contacts.map(
             (contact) => {
                 if (contact.id === Number(contact_id)) {
-
                     const new_message = {
                         content: value,
                         sendByMe: sendByMe,
-                        id: contact.messages.length + 1
+                        id: Date.now(),
+                        time: currentTime
                     }
-                    contact.messages.push(new_message)
+                    const updatedMessages = [...contact.messages, new_message]
+                    return {
+                        ...contact,
+                        lastMessage: value,
+                        messages: updatedMessages
+                    }
                 }
-
                 return contact
             }
         )
-        setContacts(
-            contacts_modified
-        )
+        setContacts(contacts_modified)
     }
 
     function deleteAllMessages() {
         const contacts_modified = contacts.map(
             (contact) => {
                 if (contact.id === Number(contact_id)) {
-                    contact.messages = []
+                    return {
+                        ...contact,
+                        messages: [],
+                        lastMessage: ""
+                    }
                 }
-
                 return contact
             }
         )
-        setContacts(
-            contacts_modified
-        )
+        setContacts(contacts_modified)
     }
-
-    /* 
-    createContact
-    deleteContactById
-    updateContactById
-    updateMessageById
-    */
-
-
 
     const provider_values = {
         contacts: contacts,
@@ -193,15 +180,12 @@ function ContactContextProvider() {
         createMessage,
         deleteAllMessages
     }
+
     return (
         <ContactContext.Provider value={provider_values}>
-            {/* 
-            el outlet hace referencia a las subrutas
-            */}
             <Outlet />
         </ContactContext.Provider>
     )
 }
-
 
 export { ContactContext, ContactContextProvider }
