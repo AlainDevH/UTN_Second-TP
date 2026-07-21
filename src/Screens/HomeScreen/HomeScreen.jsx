@@ -4,28 +4,25 @@ import WhatsappSidebar from "../../Components/WhatsappSidebar/WhatsappSidebar"
 import { ContactContext } from "../../Context/ContactContext"
 
 function HomeScreen (){
+    // La pantalla principal muestra la barra lateral de contactos.
+    // Se mantiene simple para que sea fácil de entender.
+    const { contacts } = useContext(ContactContext)
 
-    /* const products = [
-        {id: 1, price: 200, title: "tv samsung"},
-        {id: 2, price: 250, title: "tv noblex"}
-    ] */
+    const layout = { display: 'flex', minHeight: '100vh', fontFamily: 'Arial, sans-serif' }
+    const main = { flex: 1, padding: 20 }
 
-    
     return (
-        <div>
-            <WhatsappSidebar/>
-            {/* <h1>Productos</h1>
-            {
-                products.map(product => {
-                    return (
-                        <div key={product.id}>
-                            <h2>{product.title}</h2>
-                            <span>Precio: ${product.price}</span>
-                            <a href={`/products/${product.id}`}>Ver detalle</a>
-                        </div>
-                    )
-                })
-            } */}
+        <div style={layout}>
+            {/* Sidebar con lista de contactos */}
+            <WhatsappSidebar />
+
+            {/* Area principal: se puede usar para mostrar detalles o bienvenida */}
+            <main style={main}>
+                <Header />
+                <h2 style={{ marginTop: 8 }}>Bienvenido</h2>
+                <p>Tenés <strong>{contacts.length}</strong> contactos en la lista.</p>
+                <p>Seleccioná un contacto a la izquierda para ver el chat.</p>
+            </main>
         </div>
     )
 }
