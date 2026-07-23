@@ -1,7 +1,7 @@
 function Header (){
     return (
         <header>
-            <h2>Hostinger</h2>
+            <h2>WhatsApp</h2>
         </header>
     )
 }

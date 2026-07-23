@@ -4,7 +4,7 @@ import { ContactContext } from "../../Context/ContactContext"
 function MessagesList() {
     const { contact_selected, deleteMessageById } = useContext(ContactContext)
 
-    // Si no hay mensajes mostramos un texto amigable
+    // Si no hay mensajes mostramos un texto
     if (!contact_selected || contact_selected.messages.length === 0) {
         return (
             <h2>Aún no hay historial de mensajes</h2>
