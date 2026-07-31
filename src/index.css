@@ -1,0 +1,80 @@
+/* Resets globales */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background-color: var(--background-default);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Variables de Temas (Colores de WhatsApp) */
+:root {
+  --background-default: #ffffff;
+  --background-header: #f0f2f5;
+  --background-chat: #efeae2;
+  --background-welcome: #f8f9fa;
+  --border-color: #e9edef;
+  --text-primary: #111b21;
+  --text-secondary: #667781;
+  --text-green: #008069;
+  --text-green-light: #00a884;
+  --link-color: #027eb5;
+  --icon-color: #54656f;
+
+  --filter-chip-bg: #f0f2f5;
+  --filter-chip-active-bg: #e7fce3;
+  --filter-chip-active-text: #008069;
+
+  --chat-hover-bg: #f5f6f6;
+  --chat-active-bg: #f0f2f5;
+  --divider-color: #e9edef;
+  --scroll-thumb-bg: rgba(11, 20, 26, 0.2);
+}
+
+[data-theme="dark"] {
+  --background-default: #111b21;
+  --background-header: #202d33;
+  --background-chat: #0b141a;
+  --background-welcome: #222e35;
+  --border-color: #222d34;
+  --text-primary: #e9edef;
+  --text-secondary: #8696a0;
+  --text-green: #00a884;
+  --text-green-light: #00c298;
+  --link-color: #53bdeb;
+  --icon-color: #aebac1;
+
+  --filter-chip-bg: #202d33;
+  --filter-chip-active-bg: #0a332c;
+  --filter-chip-active-text: #00a884;
+
+  --chat-hover-bg: #202d33;
+  --chat-active-bg: #2a3942;
+  --divider-color: #2f3b43;
+  --scroll-thumb-bg: rgba(233, 237, 239, 0.2);
+}
+
+/* Scrollbars personalizados y consistentes */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--scroll-thumb-bg);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}

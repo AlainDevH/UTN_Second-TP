@@ -6,7 +6,12 @@ const ContactContext = createContext()
 const server_contacts = [
     {
         id: 1,
-        name: "Juan Pérez",
+        name: "Gabriel Delgado",
+        avatarUrl: "/avatars/Gabri.jpeg",
+        phone: "+54 9 11 4567-8901",
+        info: "¡Hola! Estoy usando WhatsApp y practicando React en la UTN 🚀",
+        infoDate: "15 de mayo",
+        status: "en línea",
         lastMessage: "Nos vemos mañana!",
         messages: [
             {
@@ -38,6 +43,11 @@ const server_contacts = [
     {
         id: 2,
         name: "María Gómez",
+        avatarUrl: "/avatars/Mari.jpeg",
+        phone: "+54 9 11 8765-4321",
+        info: "En la facultad 📚 | Respuestas sólo por la tarde",
+        infoDate: "20 de junio",
+        status: "últ. vez hoy a las 09:12",
         lastMessage: "Dale, gracias 🙏",
         messages: [
             {
@@ -62,7 +72,12 @@ const server_contacts = [
     },
     {
         id: 3,
-        name: "Carlos Ruiz",
+        name: "Mariano Alvarez",
+        avatarUrl: "/avatars/mariano.jpg",
+        phone: "+54 9 11 2345-6789",
+        info: "Disponible para llamadas urgentes ⚡",
+        infoDate: "Ayer",
+        status: "en línea",
         lastMessage: "Te mando el archivo",
         messages: [
             {
@@ -81,7 +96,12 @@ const server_contacts = [
     },
     {
         id: 4,
-        name: "Lucía Fernández",
+        name: "Sofi Baez",
+        avatarUrl: "/avatars/Sofi_Baez.jpeg",
+        phone: "+54 9 11 3456-7890",
+        info: "Programando en JavaScript y explorando Web Apps 💻",
+        infoDate: "Hace una semana",
+        status: "últ. vez ayer a las 22:45",
         lastMessage: "Jajaja sí",
         messages: [
             {
@@ -95,6 +115,30 @@ const server_contacts = [
                 sendByMe: true,
                 content: "Jajaja sí",
                 time: "Ayer"
+            }
+        ]
+    },
+    {
+        id: 5,
+        name: "Wili Herbas",
+        avatarUrl: "/avatars/Wili Herbas.jpeg",
+        phone: "+59 1 87 6772-7632",
+        info: "Trabajando como Freelance y creando páginas web 🤓💻",
+        infoDate: "Ayer",
+        status: "en línea",
+        lastMessage: "Dale, nos vemos en la facultad!",
+        messages: [
+            {
+                id: 1,
+                sendByMe: false,
+                content: "Nos vemos en la facultad!",
+                time: "10:00"
+            },
+            {
+                id: 2,
+                sendByMe: true,
+                content: "Dale, nos vemos en la facultad!",
+                time: "10:10"
             }
         ]
     },
@@ -173,12 +217,42 @@ function ContactContextProvider() {
         setContacts(contacts_modified)
     }
 
+    function createContact(name, phone, info) {
+        const now = new Date()
+        const hours = String(now.getHours()).padStart(2, '0')
+        const minutes = String(now.getMinutes()).padStart(2, '0')
+        const currentTime = `${hours}:${minutes}`
+        const newId = Date.now()
+
+        const newContact = {
+            id: newId,
+            name: name,
+            phone: phone || "+54 9 11 0000-0000",
+            info: info || "¡Hola! Estoy usando WhatsApp.",
+            infoDate: "Hoy",
+            status: "en línea",
+            lastMessage: "¡Chat iniciado!",
+            messages: [
+                {
+                    id: Date.now(),
+                    sendByMe: false,
+                    content: `¡Hola! Has añadido a ${name} a tus contactos.`,
+                    time: currentTime
+                }
+            ]
+        }
+
+        setContacts((prevContacts) => [newContact, ...prevContacts])
+        return newId
+    }
+
     const provider_values = {
         contacts: contacts,
         contact_selected,
         deleteMessageById,
         createMessage,
-        deleteAllMessages
+        deleteAllMessages,
+        createContact
     }
 
     return (

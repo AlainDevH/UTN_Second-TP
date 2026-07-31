@@ -1,0 +1,163 @@
+/* Fondo traslúcido para el modal */
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(11, 20, 26, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 16px;
+    animation: fadeInModal 0.2s ease-out;
+}
+
+@keyframes fadeInModal {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Tarjeta del formulario estilo WhatsApp */
+.add-contact-card {
+    width: 100%;
+    max-width: 440px;
+    background-color: var(--background-header);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    animation: scaleInCard 0.2s ease-out;
+}
+
+@keyframes scaleInCard {
+    from {
+        transform: scale(0.95);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Cabecera del Modal */
+.add-contact-header {
+    height: 60px;
+    padding: 0 20px;
+    background-color: var(--background-header);
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.add-contact-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+/* Formulario */
+.add-contact-form {
+    padding: 20px;
+    background-color: var(--background-default);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.form-error-alert {
+    background-color: rgba(234, 67, 53, 0.1);
+    color: #ea4335;
+    border: 1px solid rgba(234, 67, 53, 0.3);
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 13px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.form-group label {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+.form-input {
+    width: 100%;
+    padding: 10px 14px;
+    background-color: var(--filter-chip-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    color: var(--text-primary);
+    font-size: 14.5px;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-input:focus {
+    background-color: var(--background-default);
+    border-color: var(--text-green-light);
+    box-shadow: 0 0 0 2px rgba(0, 168, 132, 0.2);
+}
+
+.form-input::placeholder {
+    color: var(--text-secondary);
+    opacity: 0.7;
+}
+
+/* Botones de Acción */
+.add-contact-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 10px;
+    padding-top: 10px;
+}
+
+.btn-secondary {
+    background: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    padding: 9px 18px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.btn-secondary:hover {
+    background-color: var(--chat-hover-bg);
+}
+
+.btn-primary {
+    background-color: var(--text-green);
+    border: none;
+    color: #ffffff;
+    padding: 9px 20px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.2s ease, transform 0.1s ease;
+}
+
+.btn-primary:hover {
+    opacity: 0.9;
+}
+
+.btn-primary:active {
+    transform: scale(0.98);
+}
