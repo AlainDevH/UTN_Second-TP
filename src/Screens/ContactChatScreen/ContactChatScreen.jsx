@@ -26,9 +26,9 @@ const ContactChatScreen = () => {
     // Actualizar el título de la página dinámicamente para cumplir con las mejores prácticas SEO
     useEffect(() => {
         if (contact_selected) {
-            document.title = `Chat con ${contact_selected.name} - WhatsApp`
+            document.title = `Chat con ${contact_selected.name} - WhatsApp Web - AlainDev`
         } else {
-            document.title = "WhatsApp"
+            document.title = "WhatsApp Web - AlainDev"
         }
     }, [contact_selected])
 

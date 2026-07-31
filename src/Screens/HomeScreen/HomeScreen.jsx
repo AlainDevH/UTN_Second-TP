@@ -9,7 +9,7 @@ function HomeScreen() {
 
     // Actualizar el título de la página dinámicamente para cumplir con las mejores prácticas SEO
     useEffect(() => {
-        document.title = "WhatsApp Web"
+        document.title = "WhatsApp Web - AlainDev"
     }, [])
 
     return (

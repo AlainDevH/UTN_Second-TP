@@ -57,12 +57,7 @@ const WhatsappSidebar = () => {
             <aside className="whatsapp-sidebar">
                 {/* Header del Sidebar */}
                 <header className="sidebar-header">
-                    <div 
-                        className="header-left clickable-profile" 
-                        onClick={() => setShowUserProfile(true)}
-                        title={`Ver perfil de ${userProfile?.name || 'AlainDev'}`}
-                        id="open-user-profile-btn"
-                    >
+                    <div className="header-left">
                         <h2 className="brand-title">Chats</h2>
                     </div>
                     <div className="header-actions">
