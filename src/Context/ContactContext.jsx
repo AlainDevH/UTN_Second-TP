@@ -13,6 +13,7 @@ const server_contacts = [
         infoDate: "15 de mayo",
         status: "en línea",
         lastMessage: "Nos vemos mañana!",
+        unreadCount: 0,
         messages: [
             {
                 id: 1,
@@ -49,6 +50,7 @@ const server_contacts = [
         infoDate: "20 de junio",
         status: "últ. vez hoy a las 09:12",
         lastMessage: "Dale, gracias 🙏",
+        unreadCount: 0,
         messages: [
             {
                 id: 1,
@@ -79,6 +81,7 @@ const server_contacts = [
         infoDate: "Ayer",
         status: "en línea",
         lastMessage: "Te mando el archivo",
+        unreadCount: 2, //Simulación de 2 mensajes no leídos
         messages: [
             {
                 id: 1,
@@ -103,6 +106,7 @@ const server_contacts = [
         infoDate: "Hace una semana",
         status: "últ. vez ayer a las 22:45",
         lastMessage: "Jajaja sí",
+        unreadCount: 0,
         messages: [
             {
                 id: 1,
@@ -127,6 +131,7 @@ const server_contacts = [
         infoDate: "Ayer",
         status: "en línea",
         lastMessage: "Dale, nos vemos en la facultad!",
+        unreadCount: 0,
         messages: [
             {
                 id: 1,
@@ -246,9 +251,23 @@ function ContactContextProvider() {
         return newId
     }
 
+    const [userProfile, setUserProfile] = useState({
+        name: "AlainDev",
+        phone: "+54 9 11 9876-5432",
+        info: "¡Hola! Estoy usando WhatsApp y practicando React en la UTN 🚀",
+        avatarUrl: "/avatars/alaindev.png",
+        status: "en línea"
+    })
+
+    const [showUserProfile, setShowUserProfile] = useState(false)
+
     const provider_values = {
         contacts: contacts,
         contact_selected,
+        userProfile,
+        setUserProfile,
+        showUserProfile,
+        setShowUserProfile,
         deleteMessageById,
         createMessage,
         deleteAllMessages,

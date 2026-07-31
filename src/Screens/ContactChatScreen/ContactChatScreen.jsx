@@ -3,6 +3,7 @@ import { Link } from 'react-router'
 import WhatsappSidebar from '../../Components/WhatsappSidebar/WhatsappSidebar'
 import Messages from '../../Components/Messages/Messages'
 import ContactProfileDrawer from '../../Components/ContactProfileDrawer/ContactProfileDrawer'
+import UserProfileDrawer from '../../Components/UserProfileDrawer/UserProfileDrawer'
 import { ContactContext } from '../../Context/ContactContext'
 import './ContactChatScreen.css'
 
@@ -17,7 +18,7 @@ const getAvatarColor = (name) => {
 }
 
 const ContactChatScreen = () => {
-    const { contact_selected, deleteAllMessages } = useContext(ContactContext)
+    const { contact_selected, deleteAllMessages, showUserProfile, setShowUserProfile } = useContext(ContactContext)
     
     // Estado local para controlar si la vista del perfil del contacto está abierta o cerrada
     const [showProfile, setShowProfile] = useState(false)
@@ -125,10 +126,17 @@ const ContactChatScreen = () => {
             </div>
 
             {/* Renderizado Condicional del Drawer de Perfil del Contacto */}
-            {showProfile && (
+            {showProfile && !showUserProfile && (
                 <ContactProfileDrawer 
                     contact={contact_selected} 
                     onClose={() => setShowProfile(false)} 
+                />
+            )}
+
+            {/* Renderizado Condicional del Drawer de Perfil de Usuario AlainDev */}
+            {showUserProfile && (
+                <UserProfileDrawer 
+                    onClose={() => setShowUserProfile(false)} 
                 />
             )}
         </div>

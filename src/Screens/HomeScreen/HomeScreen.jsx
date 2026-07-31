@@ -1,10 +1,11 @@
 import React, { useContext, useEffect } from "react"
 import WhatsappSidebar from "../../Components/WhatsappSidebar/WhatsappSidebar"
+import UserProfileDrawer from "../../Components/UserProfileDrawer/UserProfileDrawer"
 import { ContactContext } from "../../Context/ContactContext"
 import "./HomeScreen.css"
 
 function HomeScreen() {
-    const { contacts } = useContext(ContactContext)
+    const { contacts, showUserProfile, setShowUserProfile } = useContext(ContactContext)
 
     // Actualizar el título de la página dinámicamente para cumplir con las mejores prácticas SEO
     useEffect(() => {
@@ -101,6 +102,11 @@ function HomeScreen() {
                     <span>Cifrado de extremo a extremo</span>
                 </footer>
             </main>
+
+            {/* Panel de Perfil de AlainDev a la derecha */}
+            {showUserProfile && (
+                <UserProfileDrawer onClose={() => setShowUserProfile(false)} />
+            )}
         </div>
     )
 }

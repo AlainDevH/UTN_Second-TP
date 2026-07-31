@@ -1,0 +1,169 @@
+/* Estilos para la Barra de Navegación Izquierda Vertical (Estilo WhatsApp Web / Desktop) */
+.whatsapp-nav-rail {
+  width: 64px;
+  min-width: 64px;
+  height: 100vh;
+  background-color: var(--background-header);
+  border-right: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0 16px 0;
+  box-sizing: border-box;
+  user-select: none;
+  z-index: 10;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Sección Superior */
+.nav-top-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+/* Botón Genérico de Ícono */
+.nav-item-btn {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  color: var(--icon-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease, transform 0.15s ease;
+}
+
+.nav-item-btn:hover {
+  background-color: var(--filter-chip-bg);
+  color: var(--text-primary);
+}
+
+.nav-item-btn:active {
+  transform: scale(0.94);
+}
+
+.nav-item-btn.active {
+  background-color: var(--filter-chip-bg);
+  color: var(--text-primary);
+}
+
+/* Insignias de Notificación (Badges) */
+.nav-badge {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  background-color: #25d366;
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 700;
+  min-width: 18px;
+  height: 18px;
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.dot-badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background-color: #25d366;
+  border: 2px solid var(--background-header);
+}
+
+/* Separador horizontal */
+.nav-divider {
+  width: 32px;
+  height: 1px;
+  background-color: var(--border-color);
+  margin: 6px 0;
+}
+
+/* Ícono de Meta AI con animación gradiente */
+.ai-btn .meta-ai-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: spinSlow 12s linear infinite;
+}
+
+@keyframes spinSlow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Sección Inferior */
+.nav-bottom-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+/* Botón de Perfil de AlainDev (Parte inferior izquierda) */
+.nav-profile-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  padding: 0;
+  background: transparent;
+  cursor: pointer;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+.nav-profile-btn:hover {
+  transform: scale(1.08);
+  border-color: var(--text-green-light);
+  box-shadow: 0 0 0 3px rgba(0, 168, 132, 0.3);
+}
+
+.nav-profile-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.nav-profile-fallback {
+  width: 100%;
+  height: 100%;
+  background-color: var(--text-green-light);
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Responsividad Móvil (< 768px) */
+@media (max-width: 767px) {
+  .whatsapp-nav-rail {
+    display: none; /* En vista móvil se oculta el rail lateral para maximizar espacio */
+  }
+}

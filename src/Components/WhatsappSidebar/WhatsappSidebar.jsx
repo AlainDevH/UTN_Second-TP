@@ -3,6 +3,8 @@ import { Link } from 'react-router'
 import { ContactContext } from '../../Context/ContactContext'
 import { ThemeContext } from '../../Context/ThemeContext'
 import AddContactModal from '../AddContactModal/AddContactModal'
+import UserProfileDrawer from '../UserProfileDrawer/UserProfileDrawer'
+import WhatsappNavRail from '../WhatsappNavRail/WhatsappNavRail'
 import './WhatsappSidebar.css'
 
 // Genera un color consistente basado en el nombre para los avatares
@@ -16,7 +18,7 @@ const getAvatarColor = (name) => {
 }
 
 const WhatsappSidebar = () => {
-    const { contacts, contact_selected } = useContext(ContactContext)
+    const { contacts, contact_selected, userProfile, showUserProfile, setShowUserProfile } = useContext(ContactContext)
     const { theme, setTheme } = useContext(ThemeContext)
 
     const [searchTerm, setSearchTerm] = useState('')
@@ -34,7 +36,7 @@ const WhatsappSidebar = () => {
             (contact.lastMessage && contact.lastMessage.toLowerCase().includes(searchTerm.toLowerCase()))
 
         if (activeFilter === 'No leídos') {
-            return matchesSearch && contact.name === 'María Gómez'// simulación de no leídos
+            return matchesSearch && contact.unreadCount && contact.unreadCount > 0
         }
         if (activeFilter === 'Grupos') {
             return false
@@ -42,13 +44,26 @@ const WhatsappSidebar = () => {
         return matchesSearch
     })
 
+    const userInitial = userProfile?.name ? userProfile.name.charAt(0).toUpperCase() : 'A'
+    const userAvatarBg = getAvatarColor(userProfile?.name || 'AlainDev')
+
+    const totalUnreadCount = contacts.reduce((acc, contact) => acc + (contact.unreadCount || 0), 0)
+
     return (
-        <>
+        <div className="sidebar-container-wrapper">
+            {/* Barra Vertical de Navegación con foto de AlainDev abajo a la izquierda */}
+            <WhatsappNavRail onOpenProfile={() => setShowUserProfile(true)} />
+
             <aside className="whatsapp-sidebar">
                 {/* Header del Sidebar */}
                 <header className="sidebar-header">
-                    <div className="header-left">
-                        <h2 className="brand-title">WhatsApp</h2>
+                    <div 
+                        className="header-left clickable-profile" 
+                        onClick={() => setShowUserProfile(true)}
+                        title={`Ver perfil de ${userProfile?.name || 'AlainDev'}`}
+                        id="open-user-profile-btn"
+                    >
+                        <h2 className="brand-title">Chats</h2>
                     </div>
                     <div className="header-actions">
                         {/* Botón de Cambio de Tema Oscuro / Claro */}
@@ -134,7 +149,10 @@ const WhatsappSidebar = () => {
                             className={`filter-chip ${activeFilter === filter ? 'active' : ''}`}
                             onClick={() => setActiveFilter(filter)}
                         >
-                            {filter}
+                            <span>{filter}</span>
+                            {filter === 'No leídos' && totalUnreadCount > 0 && (
+                                <span className="chip-badge">{totalUnreadCount}</span>
+                            )}
                         </button>
                     ))}
                 </div>
@@ -148,6 +166,7 @@ const WhatsappSidebar = () => {
                             const avatarBg = getAvatarColor(contact.name || '')
                             const lastMsgObj = contact.messages && contact.messages.length > 0 ? contact.messages[contact.messages.length - 1] : null
                             const lastMessageTime = lastMsgObj ? lastMsgObj.time : ''
+                            const hasUnread = Boolean(contact.unreadCount && contact.unreadCount > 0)
 
                             return (
                                 <Link
@@ -165,10 +184,15 @@ const WhatsappSidebar = () => {
                                     <div className="contact-info">
                                         <div className="contact-header">
                                             <span className="contact-name">{contact.name}</span>
-                                            <span className="contact-time">{lastMessageTime}</span>
+                                            <span className={`contact-time ${hasUnread ? 'unread' : ''}`}>{lastMessageTime}</span>
                                         </div>
                                         <div className="contact-bottom">
-                                            <p className="contact-last-message">{contact.lastMessage || 'Sin mensajes'}</p>
+                                            <p className={`contact-last-message ${hasUnread ? 'unread-text' : ''}`}>
+                                                {contact.lastMessage || 'Sin mensajes'}
+                                            </p>
+                                            {hasUnread ? (
+                                                <span className="unread-badge">{contact.unreadCount}</span>
+                                            ) : null}
                                         </div>
                                     </div>
                                 </Link>
@@ -186,7 +210,7 @@ const WhatsappSidebar = () => {
             {showAddModal && (
                 <AddContactModal onClose={() => setShowAddModal(false)} />
             )}
-        </>
+        </div>
     )
 }
 
