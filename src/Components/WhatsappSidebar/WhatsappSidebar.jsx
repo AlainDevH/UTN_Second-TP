@@ -34,7 +34,10 @@ const WhatsappSidebar = () => {
             (contact.lastMessage && contact.lastMessage.toLowerCase().includes(searchTerm.toLowerCase()))
 
         if (activeFilter === 'No leídos') {
-            return matchesSearch && contact.id % 2 === 0 // simulación de no leídos
+            return matchesSearch && contact.name === 'María Gómez'// simulación de no leídos
+        }
+        if (activeFilter === 'Grupos') {
+            return false
         }
         return matchesSearch
     })
@@ -49,9 +52,9 @@ const WhatsappSidebar = () => {
                     </div>
                     <div className="header-actions">
                         {/* Botón de Cambio de Tema Oscuro / Claro */}
-                        <button 
-                            className="icon-btn theme-toggle-btn" 
-                            title={theme === 'dark' ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'} 
+                        <button
+                            className="icon-btn theme-toggle-btn"
+                            title={theme === 'dark' ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'}
                             aria-label="Cambiar tema"
                             onClick={toggleTheme}
                             id="toggle-theme-btn"
@@ -78,9 +81,9 @@ const WhatsappSidebar = () => {
                         </button>
 
                         {/* Icono Agregar / Nuevo Contacto */}
-                        <button 
-                            className="icon-btn add-contact-btn" 
-                            title="Añadir nuevo contacto" 
+                        <button
+                            className="icon-btn add-contact-btn"
+                            title="Añadir nuevo contacto"
                             aria-label="Nuevo contacto"
                             onClick={() => setShowAddModal(true)}
                             id="open-add-contact-btn"
