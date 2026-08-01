@@ -3,6 +3,8 @@
   width: 64px;
   min-width: 64px;
   height: 100vh;
+  height: 100dvh;
+  flex-shrink: 0;
   background-color: var(--background-header);
   border-right: 1px solid var(--border-color);
   display: flex;

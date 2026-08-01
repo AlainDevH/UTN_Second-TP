@@ -5,6 +5,7 @@
     left: 0;
     width: 100vw;
     height: 100vh;
+    height: 100dvh;
     background-color: rgba(11, 20, 26, 0.7);
     display: flex;
     align-items: center;

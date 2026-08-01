@@ -1,20 +1,26 @@
 .modal-overlay {
   width: 100vw;
   height: 100vh;
+  height: 100dvh;
   position: fixed;
   top: 0;
   left: 0;
-  background-color: rgba(0, 0, 0, 0.201);
-  z-index: 10;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
   display: flex;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
+  padding: 16px;
 }
 
 .modal {
-  background-color: white;
-  padding: 15px;
-  border-radius: 15px;
-  min-width: 350px;
+  background-color: var(--background-header, #ffffff);
+  color: var(--text-primary, #111b21);
+  padding: 20px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 440px;
+  min-width: 0;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  box-sizing: border-box;
 }

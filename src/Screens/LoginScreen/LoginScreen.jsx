@@ -13,7 +13,7 @@ function LoginScreen () {
     }
 
     // Estilos simples inline para que sea fácil de entender
-    const cardStyle = { maxWidth: 360, margin: '40px auto', padding: 20, border: '1px solid #ddd', borderRadius: 8 }
+    const cardStyle = { width: '90%', maxWidth: 360, margin: '40px auto', padding: 20, border: '1px solid #ddd', borderRadius: 8, boxSizing: 'border-box' }
 
     return (
         <div style={{ display: 'flex', justifyContent: 'center' }}>
